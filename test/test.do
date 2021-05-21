@@ -21,21 +21,18 @@
     local   vars        ///
             divorce     ///
             marriage
-        
-        
-    tvsc `vars', by(treatment) clus_id(region) strat_id(region)
 
-*** Esttab
+    tvsc `vars', by(treatment) clus_id(region) stra_id(region) labels
+
+*** Exporting to latex
     // Only Treatment, Control, and Raw Differences
 	esttab using "${tables}/t1.tex", replace ${stars1}		///
 		cells("mu_2(fmt(%9.2fc)) mu_1(fmt(%9.2fc)) mu_3(fmt(%9.2fc))" "se_2(par) se_1(par) se_3(par)") 
   
-*** Esttab
     // Only Treatment, Control, and Differences with Fixed Effects
 	esttab using "${tables}/t2.tex", replace ${stars1}		///
 		cells("mu_2(fmt(%9.2fc)) mu_1(fmt(%9.2fc)) mu_4(fmt(%9.2fc))" "se_2(par) se_1(par) se_4(par)") 	        
         
-*** Esttab
     // Treatment, Control, Raw Diff, and Diff with FE
 	esttab using "${tables}/t3.tex", replace ${stars1}		///    
 		cells("mu_2(fmt(%9.2fc)) mu_1(fmt(%9.2fc)) mu_3(fmt(%9.2fc)) mu_4(fmt(%9.2fc))" "se_2(par) se_1(par) se_3(par) se_4(par)") 	               
