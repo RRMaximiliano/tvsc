@@ -1,4 +1,4 @@
-**tvsc - Stata Command that compares treatment vs control groups**
+**tvsc - Treatment vs Control groups means and differences**
 =====
 
 ## **Description**
@@ -12,4 +12,5 @@ net install tvsc, from("https://raw.githubusercontent.com/rrmaximiliano/tvsc/mai
 ```
 
 ## **Author**
+
 Rony Rodriguez-Ramirez ([rodriguezramirez@worldbank.org](mailto:rodriguezramirez@worldbank.org))
