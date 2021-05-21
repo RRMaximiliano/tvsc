@@ -36,3 +36,7 @@
     // Treatment, Control, Raw Diff, and Diff with FE
 	esttab using "${tables}/t3.tex", replace ${stars1}		///    
 		cells("mu_2(fmt(%9.2fc)) mu_1(fmt(%9.2fc)) mu_3(fmt(%9.2fc)) mu_4(fmt(%9.2fc))" "se_2(par) se_1(par) se_3(par) se_4(par)") 	               
+        
+    // Adding Number of Observations
+	esttab using "${tables}/t4.tex", replace ${stars1}		///    
+        cells("mu_2(fmt(%9.2fc)) mu_1(fmt(%9.2fc)) mu_3(fmt(%9.2fc)) N_S(fmt(%9.0fc))" "se_2(par) se_1(par) se_3(par)")     

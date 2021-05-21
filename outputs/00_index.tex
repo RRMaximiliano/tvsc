@@ -131,7 +131,7 @@ Return to \nameref{sec:updates}.%
 \begin{document}
 
 % Title, Author, Date
-\title{tvsc command}
+\title{\texttt{tvsc} command}
 \author{Rony Rodrigo Maximiliano Rodriguez-Ramirez}
 \date{}
 \maketitle
@@ -193,7 +193,7 @@ Return to \nameref{sec:updates}.%
    \end{adjustbox}
  \end{table}
 %-------------------------------------------------------------------
-% table 2
+% table 3
 %-------------------------------------------------------------------
 \begin{table}[H]
     \singlespacing
@@ -219,6 +219,33 @@ Return to \nameref{sec:updates}.%
       \end{threeparttable}
    \end{adjustbox}
  \end{table}
+%-------------------------------------------------------------------
+% table 4
+%-------------------------------------------------------------------
+\begin{table}[H]
+  \singlespacing
+  \small
+  \centering 
+  \begin{adjustbox}{max width=\textwidth}
+    \begin{threeparttable}
+      \caption{Raw Differences with observations}
+      \label{tab:table4}
+      \begin{tabular}[t]{@{}lcccc}
+          \toprule
+          Variable & Treatment & Control & Raw & Obs.  \\
+          \midrule 
+          \addlinespace
+          \primitiveinput{tables/t4.tex}
+          \bottomrule
+      \end{tabular}
+      \begin{tablenotes}
+          \setlength\labelsep{0pt}
+          \footnotesize
+          \item \textit{Notes}: Standard errors clustered at the region level.
+      \end{tablenotes}
+    \end{threeparttable}
+ \end{adjustbox}
+\end{table}
 
 %-------------------------------------------------------------------
 % End document
