@@ -15,10 +15,8 @@
 
 *** Create treatment variable
     set seed 01237846
-    gen random = uniform()
-    gen treatment = (random > 0.5)
-    drop random 
-
+    gen treatment = (runiform()<.5)
+   
 *** TvsC
     local   vars        ///
             divorce     ///

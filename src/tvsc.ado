@@ -5,11 +5,14 @@ program tvsc, eclass
 	syntax  varlist [aw pw fw] [if] [in], by(varname) [ ///
             CLUS_id(varname numeric)                    ///
             STRAT_id(varname numeric)                   ///
+            LABELS                                      ///
+            SD                                          ///
             ] [ * ]
 
 	marksample 	touse
 	markout 	`touse' `by'
-	tempname 	mu_1 mu_2 mu_3 mu_4 se_1 se_2 se_3 se_4 sd_1 sd_2 d_p d_p2 N_C N_T N_S N_FE S_S S_FE
+	tempname 	mu_1 mu_2 mu_3 mu_4 se_1 se_2 se_3 se_4 sd_1 sd_2 d_p d_p2 N_C N_T N_S N_FE S_S S_FE ///
+                diff diff_se treat treat_se
 	    
     // Cluster local
     local vce 
@@ -24,6 +27,7 @@ program tvsc, eclass
     }
     
     // Create comparison
+    quietly {
 	capture drop TD*
 	tab `by' , gen(TD) 
     
@@ -81,26 +85,49 @@ program tvsc, eclass
 	if "`strat_id'" != "" {
 		foreach mat in mu_1 mu_2 mu_3 mu_4 se_1 se_2 se_3 se_4 sd_1 sd_2 d_p d_p2 N_C N_T N_S N_FE S_S S_FE {
 			mat coln ``mat'' = `varlist'
-		}
-		
-		local cmd "tvsc"
-		foreach mat in mu_1 mu_2 mu_3 mu_4  se_1 se_2 se_3 se_4 sd_1 sd_2 d_p d_p2 N_C N_T N_S N_FE S_S S_FE {
 			eret mat `mat' = ``mat''
 		}
 	}
     
 	else {
-		foreach mat in mu_1 mu_2 mu_3 se_1 se_2 se_3 sd_1 sd_2 d_p N_C N_T N_S S_S  {
-			mat coln ``mat'' = `varlist'
-		}
-		
-		local cmd "tvsc"
 		foreach mat in mu_1 mu_2 mu_3 se_1 se_2 se_3 sd_1 sd_2 d_p N_C N_T N_S S_S {
+			mat coln ``mat'' = `varlist'
 			eret mat `mat' = ``mat''
 		}
 	}
     
 	drop TD*
+    }
+    
+    // Display results
+    local viz "nomtitle nonumbers noobs b(3) se(3)"
+    if "`labels'" != "" {
+        local viz "`viz' label"
+    }
+    
+    if "`sd'" != "" {
+        if "`strat_id'" != "" {
+            esttab, `viz' collabels("Treatment" "Control" "Diff" "FE Diff") /// 
+                cells("mu_2(fmt(%9.2fc)) mu_1(fmt(%9.2fc)) mu_3(fmt(%9.2fc)) mu_4(fmt(%9.2fc))" "sd_2(par) sd_1(par) se_3(par) se_4(par)") 
+        }
+        
+        else {
+            esttab, `viz' collabels("Treatment" "Control" "Difference") /// 
+                cells("mu_2(fmt(%9.2fc)) mu_1(fmt(%9.2fc)) mu_3(fmt(%9.2fc))" "sd_2(par) sd_1(par) se_3(par)") 
+        }
+    }
+    
+    else {
+        if "`strat_id'" != "" {
+            esttab, `viz' collabels("Treatment" "Control" "Diff" "FE Diff") /// 
+                cells("mu_2(fmt(%9.2fc)) mu_1(fmt(%9.2fc)) mu_3(fmt(%9.2fc)) mu_4(fmt(%9.2fc))" "se_2(par) se_1(par) se_3(par) se_4(par)") 
+        }
+        
+        else {
+            esttab, `viz' collabels("Treatment" "Control" "Difference") /// 
+                cells("mu_2(fmt(%9.2fc)) mu_1(fmt(%9.2fc)) mu_3(fmt(%9.2fc))" "se_2(par) se_1(par) se_3(par)") 
+        }        
+    }
     
 end
 
