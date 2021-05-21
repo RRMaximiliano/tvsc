@@ -1,12 +1,13 @@
-
-
-*** Tables globals
+*** Globals
+    // Path
     if "`c(username)'" == "ifyou" {
     	global project "D:/Documents/GitHub/tvsc"
     }
+    
     global outputs  "${project}/outputs"
     global tables   "${outputs}/tables"
 
+    // Tables
 	global stars1	"label nolines nogaps fragment nomtitle nonumbers noobs nodep star(* 0.10 ** 0.05 *** 0.01) collabels(none) booktabs b(3) se(3)"
 
 *** Load dataset
