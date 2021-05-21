@@ -22,7 +22,7 @@
             divorce     ///
             marriage
 
-    tvsc `vars', by(treatment) clus_id(region) stra_id(region) labels
+    tvsc `vars', by(treatment) clus_id(region) strat_id(region) labels
 
 *** Exporting to latex
     // Only Treatment, Control, and Raw Differences
