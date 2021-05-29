@@ -152,4 +152,6 @@ Number of marriages &   40,064.50&   57,421.09&   -17356.59         \\
 
 ## Author
 
-Rony Rodriguez-Ramirez ([rodriguezramirez@worldbank.org](mailto:rodriguezramirez@worldbank.org))
+I do not consider myself the author of this command since it draws from ado files that were written before by [Profe Mauricio Romero](https://mauricio-romero.com/). I just adapted it to have more options and to be downloadable.
+
+In case you would like to contact me, you can email me at: [rodriguezramirez@worldbank.org](mailto:rodriguezramirez@worldbank.org)
